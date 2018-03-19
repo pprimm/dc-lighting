@@ -6,7 +6,9 @@ import registerServiceWorker from './registerServiceWorker';
 import { ThemeProvider } from 'styled-components'
 
 const theme = {
-  appBG: '#091c2a',
+  darkBG: '#2c3e50',
+  lightBG: '#34495e',
+  lightText: '#ecf0f1',
   listLightBG: '#2c3e50',
   lightOnDark: '#f39c12',
   lightOnLight: '#f1c40f'

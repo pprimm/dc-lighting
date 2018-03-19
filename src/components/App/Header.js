@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 const HeaderContainer = styled.div`
   position: fixed;
-  background-color: ${({theme}) => theme.appBG};
-  opacity: 0.5;
-  color: white;
+  background-color: ${({theme}) => theme.darkBG};
+  opacity: 1.0;
+  color: ${({theme}) => theme.lightText};
   margin: 0px;
   display: flex;
   top: 0;
