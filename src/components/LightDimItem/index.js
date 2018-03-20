@@ -4,6 +4,8 @@ import FaCircleO from 'react-icons/lib/fa/circle-o'
 import FaCircle from 'react-icons/lib/fa/circle'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
+import {connect} from '@cerebral/react'
+import {state, props} from 'cerebral/tags'
 
 const Container = styled.div`
   display: flex;
@@ -60,23 +62,27 @@ const LightSlider = props =>
     {...props}
   />
 
-const LightDimItem = ( { label, value } ) =>
-  <Container>
-    <TopArea>
-      <TopLabel>{label}</TopLabel>
-      <TopValue>{value}%</TopValue>
-    </TopArea>
-    <BottomArea>
-      <BottomIcon>
-        <FaCircleO />
-      </BottomIcon>
-      <BottomSliderArea>
-        <LightSlider value={value}/>
-      </BottomSliderArea>
-      <BottomIcon>
-        <FaCircle />
-      </BottomIcon>
-    </BottomArea>
-  </Container>
-
-export default LightDimItem
+export default connect({
+  value: state`dev.${props`devID`}.level`
+},
+  function LightDimItem ({label, value}) {
+    return (
+      <Container>
+      <TopArea>
+        <TopLabel>{label}</TopLabel>
+        <TopValue>{value}%</TopValue>
+      </TopArea>
+      <BottomArea>
+        <BottomIcon>
+          <FaCircleO />
+        </BottomIcon>
+        <BottomSliderArea>
+          <LightSlider value={value}/>
+        </BottomSliderArea>
+        <BottomIcon>
+          <FaCircle />
+        </BottomIcon>
+      </BottomArea>
+    </Container>
+  )}
+)

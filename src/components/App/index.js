@@ -32,12 +32,12 @@ const App = () =>
       <ListHeader>Devices</ListHeader>
       <LightDimItem
         label={"Ceiling Light"}
-        value={50}
+        devID={"dev02"}
       />
       <Divider />
       <LightDimItem
         label={"Chandelier"}
-        value={50}
+        devID={"dev03"}
       />
       <Divider />
       <LightSwitchItem
