@@ -4,6 +4,8 @@ import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { ThemeProvider } from 'styled-components'
+import { Container } from '@cerebral/react'
+import controller from './controller'
 
 const theme = {
   darkBG: '#091C2A',
@@ -15,7 +17,9 @@ const theme = {
 }
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <App />
-  </ThemeProvider>, document.getElementById('root'));
+  <Container controller={controller}>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </Container>, document.getElementById('root'));
 registerServiceWorker();
