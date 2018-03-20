@@ -28,7 +28,7 @@ function App () {
         <LightSceneItem label={"Evening"} active={false} />
         <Divider />
         <LightSceneItem label={"Early Morning"} active={false} />
-        <Divider />
+        <ListHeader>Devices</ListHeader>
         <p>some text to show something</p>
         <p>some text to show something</p>
         <p>some text to show something</p>

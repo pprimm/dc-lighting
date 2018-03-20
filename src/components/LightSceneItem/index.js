@@ -13,7 +13,7 @@ const Container = styled.div`
 const IconArea = styled.div`
   color: ${props => props.active ?
     props.theme.lightOnDark :
-    props.theme.lightText};
+    props.theme.darkText};
   min-width: 2em;
   margin: auto 0.2em;
   text-align: center;
