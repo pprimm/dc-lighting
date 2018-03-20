@@ -41,5 +41,6 @@ export default connect({
           <Switch checked={value} onChange={switchChange} />
         </SwitchArea>
       </Container>
-  )}
+    )
+  }
 )

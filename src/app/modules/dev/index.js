@@ -7,6 +7,7 @@ export default Module({
   },
   signals: {
     selectDimControl: sequences.changeDimLevel,
-    selectSwitch: sequences.changeSwitch
+    selectSwitch: sequences.changeSwitch,
+    selectScene: sequences.selectScene,
   }
 })

@@ -20,15 +20,17 @@ const App = () =>
     <Header title="Lights" />
     <List>
       <ListHeader>Scenes</ListHeader>
-      <LightSceneItem label={"Good Night"} active={false} />
+      <LightSceneItem label={"Good Night"} devID={"dev01"} />
       <Divider />
-      <LightSceneItem label={"Good Morning"} active={true} />
+      <LightSceneItem label={"Good Morning"} devID={"dev01"} />
       <Divider />
-      <LightSceneItem label={"Day"} active={false} />
+      <LightSceneItem label={"Day"} devID={"dev01"} />
       <Divider />
-      <LightSceneItem label={"Evening"} active={false} />
+      <LightSceneItem label={"Evening"} devID={"dev01"} />
       <Divider />
-      <LightSceneItem label={"Early Morning"} active={false} />
+      <LightSceneItem label={"Early Morning"} devID={"dev01"} />
+      <Divider />
+      <LightSceneItem label={"Off"} devID={"dev01"} />
       <ListHeader>Devices</ListHeader>
       <LightDimItem
         label={"Ceiling Light"}
