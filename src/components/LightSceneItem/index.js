@@ -23,7 +23,6 @@ const LabelArea = styled.div`
   color: ${props => props.theme.lightText};
   margin: auto;
   flex: 1 0;
-  font-size: 0.8em;
 `
 
 const LightSceneItem = ( { label,active } ) => {
