@@ -3,6 +3,15 @@ import AppContainer from './AppContainer'
 import Header from './Header'
 import List from '../List'
 import ListHeader from '../ListHeader'
+import LightSceneItem from '../LightSceneItem'
+import styled from 'styled-components'
+
+const Divider = styled.div`
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  border-style: solid;
+  border-color: #34495e;
+`
 
 function App () {
   return (
@@ -10,10 +19,16 @@ function App () {
       <Header title="Lights" />
       <List>
         <ListHeader>Scenes</ListHeader>
-        <p>First Item</p>
-        <p>some text to show something 2</p>
-        <p>some text to show something 3</p>
-        <p>some text to show something</p>
+        <LightSceneItem label={"Good Night"} active={true} />
+        <Divider />
+        <LightSceneItem label={"Good Morning"} active={false} />
+        <Divider />
+        <LightSceneItem label={"Day"} active={false} />
+        <Divider />
+        <LightSceneItem label={"Evening"} active={false} />
+        <Divider />
+        <LightSceneItem label={"Early Morning"} active={false} />
+        <Divider />
         <p>some text to show something</p>
         <p>some text to show something</p>
         <p>some text to show something</p>

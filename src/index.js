@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { ThemeProvider } from 'styled-components'
 
 const theme = {
-  darkBG: '#2c3e50',
+  darkBG: '#091C2A',
   lightBG: '#34495e',
   lightText: '#ecf0f1',
   listLightBG: '#2c3e50',
@@ -15,7 +15,7 @@ const theme = {
 }
 
 ReactDOM.render(
-  <ThemeProvider  theme={theme}>
+  <ThemeProvider theme={theme}>
     <App />
   </ThemeProvider>, document.getElementById('root'));
 registerServiceWorker();
