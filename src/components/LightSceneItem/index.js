@@ -13,7 +13,7 @@ const Container = styled.div`
 const IconArea = styled.div`
   color: ${props => props.active ?
     props.theme.lightOnDark :
-    props.theme.darkText};
+    props.theme.lightText};
   min-width: 2em;
   margin: auto 0.2em;
   text-align: center;
@@ -36,9 +36,7 @@ const LightSceneItem = ( { label,active } ) => {
       <IconArea active={active}>
         <FaLightbulbO size={'1.2em'} />
       </IconArea>
-      <LabelArea color={'white'} >
-        {label}
-      </LabelArea>
+      <LabelArea>{label}</LabelArea>
       <IconArea active={active}>
         { active && <FaCheck size={'1.2em'} />}
       </IconArea>
