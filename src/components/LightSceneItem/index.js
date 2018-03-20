@@ -27,24 +27,6 @@ const LabelArea = styled.div`
   flex: 1 0;
 `
 
-const LightSceneItem = ( { label,active } ) => {
-  const handler = event => {
-    event.preventDefault()
-    console.log(`${label} selected`)
-  }
-  return (
-    <Container onClick={ handler } >
-      <IconArea active={active}>
-        <FaLightbulbO size={'1.2em'} />
-      </IconArea>
-      <LabelArea>{label}</LabelArea>
-      <IconArea active={active}>
-        { active && <FaCheck size={'1.2em'} />}
-      </IconArea>
-    </Container>
-  )
-}
-
 export default connect({
   scene: state`dev.${props`devID`}.scene`,
   selectScene: signal`dev.selectScene`
