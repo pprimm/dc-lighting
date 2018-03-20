@@ -46,6 +46,7 @@ const LightSlider = props =>
     min={0}
     max={100}
     step={1}
+    value={props.value}
     railStyle={{backgroundColor: '#7f8c8d'}}
     trackStyle={{backgroundColor: '#f1c40f'}}
     handleStyle={{
@@ -59,18 +60,18 @@ const LightSlider = props =>
     {...props}
   />
 
-const LightDimItem = () =>
+const LightDimItem = ( { label, value } ) =>
   <Container>
     <TopArea>
-      <TopLabel>Label</TopLabel>
-      <TopValue>50%</TopValue>
+      <TopLabel>{label}</TopLabel>
+      <TopValue>{value}%</TopValue>
     </TopArea>
     <BottomArea>
       <BottomIcon>
         <FaCircleO />
       </BottomIcon>
       <BottomSliderArea>
-        <LightSlider />
+        <LightSlider value={value}/>
       </BottomSliderArea>
       <BottomIcon>
         <FaCircle />

@@ -5,6 +5,7 @@ import List from '../List'
 import ListHeader from '../ListHeader'
 import LightSceneItem from '../LightSceneItem'
 import LightDimItem from '../LightDimItem'
+import LightSwitchItem from '../LightSwitchItem'
 import styled from 'styled-components'
 
 const Divider = styled.div`
@@ -29,21 +30,26 @@ const App = () =>
       <Divider />
       <LightSceneItem label={"Early Morning"} active={false} />
       <ListHeader>Devices</ListHeader>
-      <LightDimItem />
+      <LightDimItem
+        label={"Ceiling Light"}
+        value={50}
+      />
       <Divider />
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>some text to show something</p>
-      <p>Last Item</p>
+      <LightDimItem
+        label={"Chandelier"}
+        value={50}
+      />
+      <Divider />
+      <LightSwitchItem
+        label={"Flood Lights"}
+        active={false}
+      />
+      <Divider />
+      <LightSwitchItem
+        label={"Lamp"}
+        active={true}
+      />
+      <Divider />
     </List>
   </AppContainer>
 

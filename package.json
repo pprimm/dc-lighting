@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "rc-slider": "^8.6.1",
+    "rc-switch": "^1.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",

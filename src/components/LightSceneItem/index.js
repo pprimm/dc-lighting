@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const IconArea = styled.div`
   color: ${props => props.active ?
-    props.theme.lightOnDark :
+    props.theme.lightOnLight :
     props.theme.lightText};
   min-width: 2em;
   margin: auto 0.2em;
