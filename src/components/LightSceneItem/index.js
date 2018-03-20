@@ -8,7 +8,6 @@ import {state, props, signal} from 'cerebral/tags'
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  font-size: 1rem;
   height: 2.5em;
 `
 

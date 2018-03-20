@@ -10,6 +10,7 @@ const AppContainer = styled.div`
   padding: 3em 0 0 0;
   left: 0;
   text-align: center;
+  font-size: 1.2em;
 `
 
 export default AppContainer

@@ -40,7 +40,7 @@ const BottomIcon = styled.div`
 
 const BottomSliderArea = styled.div`
   flex: 1 0 auto;
-  margin: 11px 8px auto 8px;
+  margin: 0.7em 1em auto 1em;
 `
 
 const LightSlider = props =>
