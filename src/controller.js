@@ -10,4 +10,23 @@ const devtools =
 
 export default Controller(app, {
   devtools,
+  stateChanges: {
+    dev: {    
+      dev01: {
+        scene: "Off"
+      },
+      dev02: {
+        level: 0
+      },
+      dev03: {
+        level: 0
+      },
+      dev04: {
+        switch: false
+      },
+      dev05: {
+        switch: false
+      }
+    }
+  }
 })
