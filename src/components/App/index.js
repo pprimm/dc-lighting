@@ -42,12 +42,12 @@ const App = () =>
       <Divider />
       <LightSwitchItem
         label={"Flood Lights"}
-        active={false}
+        devID={"dev04"}
       />
       <Divider />
       <LightSwitchItem
         label={"Lamp"}
-        active={true}
+        devID={"dev05"}
       />
       <Divider />
     </List>

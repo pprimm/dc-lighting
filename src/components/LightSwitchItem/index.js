@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import Switch from 'rc-switch'
 import 'rc-switch/assets/index.css'
+import {connect} from '@cerebral/react'
+import {state, props, signal} from 'cerebral/tags'
 
 const Container = styled.div`
   display: flex;
@@ -22,17 +24,22 @@ const SwitchArea = styled.div`
   text-align: center;
 `
 
-const LightSwitchItem = ( { label,active } ) => {
-  return (
-    <Container>
-      <LabelArea>
-        {label}
-      </LabelArea>
-      <SwitchArea>
-        <Switch checked={active} />
-      </SwitchArea>
-    </Container>
-  )
-}
-
-export default LightSwitchItem
+export default connect({
+  value: state`dev.${props`devID`}.switch`,
+  selectSwitch: signal`dev.selectSwitch`
+},
+  function LightSwitchItem ({ label, devID, value, selectSwitch}) {
+    const switchChange = (newValue) => {
+      selectSwitch({id: devID, newValue: newValue})
+    }
+    return (
+      <Container>
+        <LabelArea>
+          {label}
+        </LabelArea>
+        <SwitchArea>
+          <Switch checked={value} onChange={switchChange} />
+        </SwitchArea>
+      </Container>
+  )}
+)

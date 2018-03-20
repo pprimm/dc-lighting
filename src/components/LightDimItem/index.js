@@ -5,7 +5,7 @@ import FaCircle from 'react-icons/lib/fa/circle'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import {connect} from '@cerebral/react'
-import {state, props} from 'cerebral/tags'
+import {state, props, signal} from 'cerebral/tags'
 
 const Container = styled.div`
   display: flex;
@@ -59,13 +59,18 @@ const LightSlider = props =>
       marginLeft: '-0.5em',
       marginTop: '-0.5em'
     }}
+    onChange={props.onChange}
     {...props}
   />
 
 export default connect({
-  value: state`dev.${props`devID`}.level`
+  value: state`dev.${props`devID`}.level`,
+  dragDimControl: signal`dev.selectDimControl`
 },
-  function LightDimItem ({label, value}) {
+  function LightDimItem ({ label, devID, value, dragDimControl}) {
+    const sliderChange = (newValue) => {
+      dragDimControl({id: devID, newValue: newValue})
+    }
     return (
       <Container>
       <TopArea>
@@ -77,7 +82,7 @@ export default connect({
           <FaCircleO />
         </BottomIcon>
         <BottomSliderArea>
-          <LightSlider value={value}/>
+          <LightSlider value={value} onChange={sliderChange} />
         </BottomSliderArea>
         <BottomIcon>
           <FaCircle />

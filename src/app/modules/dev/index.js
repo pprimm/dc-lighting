@@ -1,4 +1,6 @@
 import { Module } from 'cerebral'
+import * as sequences from './sequences'
+
 
 export default Module({
   state: {
@@ -12,11 +14,14 @@ export default Module({
       level: 50
     },
     dev04: {
-      switch: "on"
+      switch: true
     },
     dev05: {
-      switch: "off"
+      switch: false
     },
   },
-  signals: {}
+  signals: {
+    selectDimControl: sequences.changeDimLevel,
+    selectSwitch: sequences.changeSwitch
+  }
 })
