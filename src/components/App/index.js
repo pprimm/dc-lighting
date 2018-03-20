@@ -30,6 +30,7 @@ const App = () =>
       <LightSceneItem label={"Early Morning"} active={false} />
       <ListHeader>Devices</ListHeader>
       <LightDimItem />
+      <Divider />
       <p>some text to show something</p>
       <p>some text to show something</p>
       <p>some text to show something</p>
