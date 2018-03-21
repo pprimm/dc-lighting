@@ -3,6 +3,8 @@ import mqtt from 'mqtt'
 
 const filterDimValue = value => value < 0 ? 0 : (value > 100 ? 100 : value)
 
+const DEVICE_REGEX = /get\/(.*)\/(.*)/
+
 function MQTTProvider(options = {}) {
   let cachedClient = null
 
@@ -17,6 +19,7 @@ function MQTTProvider(options = {}) {
       console.info('MQTT: Connected')
       cachedClient.publish('presence',"MQTT React App Client is here!!!")
       // can subscribe to topics now
+      cachedClient.subscribe('get/dev/#')
     })
 
     cachedClient.on('close', function (err) {
@@ -30,12 +33,30 @@ function MQTTProvider(options = {}) {
     cachedClient.on('reconnect', function (err) {
       console.info('MQTT: Reconnecting to MQTT Broker')
     })
+
+    cachedClient.on('message', function (topic, message) {
+      console.log(`mqtt message received: ${topic} = ${message}`)
+      const topicItems = topic.split('/')
+      if (topicItems[0] === "get") {
+        switch (topicItems[1]) {
+          case "dev":
+            const stateItems = topicItems.slice(2)
+            const statePath = stateItems.join(".")
+            console.log(`${statePath} = ${message}`)
+            break;
+          case "view":
+            break;
+          default:
+            break;
+        }
+      }
+    })
     return cachedClient
   }
 
   return Provider({
     connect() {
-      const client = getClient()
+      getClient()
     },
     announce(text) {
       console.log(`MQTTProvider::announce(...) called w/ text: ${text}`)
