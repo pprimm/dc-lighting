@@ -18,7 +18,10 @@ export default Module(({ controller }) => {
     modules: {
       dev,
       mqtt: MQTTModule({
-        someOption: "option value"
+        mqttUrl: 'ws://10.10.101.29:8083/mqtt',
+        mqttOptions: {keepAlive: 1},
+        deviceMqttRoot: 'dev',
+        deviceList: ['dev01','dev02','dev03','dev04','dev05'],
       }),
     },
     providers: {

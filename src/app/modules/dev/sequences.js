@@ -1,7 +1,12 @@
 import { sequence } from 'cerebral'
+import { debounce } from 'cerebral/operators'
 
-function dimChangeAction({props,state}) {
+function dimChangeState({props,state,mqtt}) {
   state.set(`dev.${props.id}.level`, props.newValue)
+}
+
+function dimUpdateMqtt({props,mqtt}) {
+  mqtt.updateDimLevel(props.id,props.newValue)
 }
 
 function switchChangeAction({props,state}) {
@@ -13,7 +18,10 @@ function selectSceneAction({props,state}) {
 }
 
 export const changeDimLevel = sequence('Change Dim Level', [
-  dimChangeAction
+  debounce(50), {
+    continue: [dimChangeState, dimUpdateMqtt],
+    discard: [dimChangeState]
+  }
 ])
 
 export const changeSwitch = sequence('Change Switch Value', [

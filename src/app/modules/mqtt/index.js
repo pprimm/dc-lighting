@@ -3,8 +3,8 @@ import { sequence } from 'cerebral'
 import MQTTProvider from './MQTTProvider'
 
 function providerInitialize(context) {
-  console.log(context)
   context.mqtt.announce("I'm here!!!")
+  context.mqtt.connect()
 }
 
 const initialize = sequence('Initialize for MQTT Module', [
@@ -25,6 +25,9 @@ export default options => {
     })
 
     return {
+      state: {
+        connected: false
+      },
       signals: {
         mqttInit: initialize
       }, 
