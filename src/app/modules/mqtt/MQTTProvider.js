@@ -7,6 +7,7 @@ const DEVICE_REGEX = /get\/(.*)\/(.*)/
 
 function MQTTProvider(options = {}) {
   let cachedClient = null
+  let mqttDeviceSignal = null
 
   const getClient = () => {
     if (cachedClient) {
@@ -43,6 +44,9 @@ function MQTTProvider(options = {}) {
             const stateItems = topicItems.slice(2)
             const statePath = stateItems.join(".")
             console.log(`${statePath} = ${message}`)
+            if (mqttDeviceSignal) {
+              mqttDeviceSignal({path: statePath, value: Number.parseInt(message,10)})
+            }
             break;
           case "view":
             break;
@@ -55,6 +59,9 @@ function MQTTProvider(options = {}) {
   }
 
   return Provider({
+    initialize(options) {
+      mqttDeviceSignal = options.mqttSignal;
+    },
     connect() {
       getClient()
     },

@@ -4,11 +4,23 @@ import MQTTProvider from './MQTTProvider'
 
 function providerInitialize(context) {
   context.mqtt.announce("I'm here!!!")
+  context.mqtt.initialize({
+    mqttSignal: context.controller.getSignal('mqtt.mqttSetDeviceState')
+  })
   context.mqtt.connect()
 }
 
 const initialize = sequence('Initialize for MQTT Module', [
   providerInitialize
+])
+
+function mqttToDeviceState({props,state}) {
+  console.log(`mqttToState Action should set state dev.${props.path} to ${props.value}`)
+  state.set(`dev.${props.path}`, props.value)
+}
+
+const mqttSetDeviceState = sequence('Set state from MQTT', [
+  mqttToDeviceState
 ])
 
 export default options => {
@@ -29,7 +41,8 @@ export default options => {
         connected: false
       },
       signals: {
-        mqttInit: initialize
+        mqttInit: initialize,
+        mqttSetDeviceState: mqttSetDeviceState
       }, 
       providers: {
         [name]: MQTTProvider(options),
