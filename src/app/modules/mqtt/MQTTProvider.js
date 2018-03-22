@@ -3,8 +3,6 @@ import mqtt from 'mqtt'
 
 const filterDimValue = value => value < 0 ? 0 : (value > 100 ? 100 : value)
 
-const DEVICE_REGEX = /get\/(.*)\/(.*)/
-
 function MQTTProvider(options = {}) {
   let cachedClient = null
   let mqttDeviceSignal = null
@@ -36,14 +34,15 @@ function MQTTProvider(options = {}) {
     })
 
     cachedClient.on('message', function (topic, message) {
-      console.log(`mqtt message received: ${topic} = ${message}`)
+      // !!! message is a Buffer
+      //console.log(`mqtt message received: ${topic} = ${message}`)
       const topicItems = topic.split('/')
       if (topicItems[0] === "get") {
         switch (topicItems[1]) {
           case "dev":
             const stateItems = topicItems.slice(2)
             const statePath = stateItems.join(".")
-            console.log(`${statePath} = ${message}`)
+            //console.log(`${statePath} = ${message}`)
             if (mqttDeviceSignal) {
               mqttDeviceSignal({path: statePath, value: Number.parseInt(message,10)})
             }

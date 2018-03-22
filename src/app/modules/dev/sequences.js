@@ -17,10 +17,17 @@ function selectSceneAction({props,state}) {
   state.set(`dev.${props.id}.scene`, props.newScene)
 }
 
-export const changeDimLevel = sequence('Change Dim Level', [
+/*export const changeDimLevel = sequence('Change Dim Level', [
   debounce(50), {
     continue: [dimChangeState, dimUpdateMqtt],
     discard: [dimChangeState]
+  }
+])*/
+
+export const changeDimLevel = sequence('Change Dim Level', [
+  debounce(10), {
+    continue: [dimUpdateMqtt],
+    discard: []
   }
 ])
 

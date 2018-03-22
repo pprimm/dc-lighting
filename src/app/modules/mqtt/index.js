@@ -15,7 +15,6 @@ const initialize = sequence('Initialize for MQTT Module', [
 ])
 
 function mqttToDeviceState({props,state}) {
-  console.log(`mqttToState Action should set state dev.${props.path} to ${props.value}`)
   state.set(`dev.${props.path}`, props.value)
 }
 
