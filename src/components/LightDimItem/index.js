@@ -59,6 +59,7 @@ const LightSlider = props =>
       marginLeft: '-0.5em',
       marginTop: '-0.5em'
     }}
+    onBeforeChange={props.onChange}
     onChange={props.onChange}
     {...props}
   />
@@ -68,6 +69,10 @@ export default connect({
   dragDimControl: signal`dev.selectDimControl`
 },
   function LightDimItem ({ label, devID, value, dragDimControl}) {
+    const onOffClick = (e, newValue) => {
+      e.preventDefault()
+      dragDimControl({id: devID, newValue: newValue})
+    }
     const sliderChange = (newValue) => {
       dragDimControl({id: devID, newValue: newValue})
     }
@@ -78,14 +83,14 @@ export default connect({
         <TopValue>{value}%</TopValue>
       </TopArea>
       <BottomArea>
-        <BottomIcon>
-          <FaCircleO />
+        <BottomIcon >
+          <FaCircleO onClick={e => onOffClick(e,0)} />
         </BottomIcon>
         <BottomSliderArea>
           <LightSlider value={value} onChange={sliderChange} />
         </BottomSliderArea>
         <BottomIcon>
-          <FaCircle />
+          <FaCircle onClick={e => onOffClick(e,100)} />
         </BottomIcon>
       </BottomArea>
     </Container>
