@@ -46,7 +46,7 @@ function MQTTProvider(options = {}) {
           case "dev":
             if (mqttDeviceSignal) {
               //console.log(`${statePath} = ${message}`)
-              mqttDeviceSignal({path: statePath, value: Number.parseInt(message,10)})
+              mqttDeviceSignal({path: statePath, value: message.toString()})//Number.parseInt(message,10)})
             }
             break;
           case "view":
@@ -74,10 +74,18 @@ function MQTTProvider(options = {}) {
     announce(text) {
       console.log(`MQTTProvider::announce(...) called w/ text: ${text}`)
     },
-    updateDimLevel(deviceID,value) {
-      const topic = `set/dev/${deviceID}/level`
+    updateScene(deviceId,value) {
+      const topic = `set/dev/${deviceId}/scene`
+      getClient().publish(topic,value)
+    },
+    updateDimLevel(deviceId,value) {
+      const topic = `set/dev/${deviceId}/level`
       getClient().publish(topic,`${filterDimValue(value)}`)
-    }
+    },
+    updateSwitch(deviceId,value) {
+      const topic = `set/dev/${deviceId}/switch`
+      getClient().publish(topic,value ? 'true' : 'false')
+    },
   })
 
 }

@@ -9,12 +9,14 @@ function dimUpdateMqtt({props,mqtt}) {
   mqtt.updateDimLevel(props.id,props.newValue)
 }
 
-function switchChangeAction({props,state}) {
-  state.set(`dev.${props.id}.switch`, props.newValue)
+function switchChangeAction({props,mqtt}) {
+  //state.set(`dev.${props.id}.switch`, props.newValue)
+  mqtt.updateSwitch(props.id,props.newValue)
 }
 
-function selectSceneAction({props,state}) {
-  state.set(`dev.${props.id}.scene`, props.newScene)
+function selectSceneAction({props,mqtt}) {
+  //state.set(`dev.${props.id}.scene`, props.newScene)
+  mqtt.updateScene(props.id,props.newScene)
 }
 
 /*export const changeDimLevel = sequence('Change Dim Level', [

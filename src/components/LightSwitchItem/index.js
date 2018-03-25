@@ -37,7 +37,7 @@ export default connect({
           {label}
         </LabelArea>
         <SwitchArea>
-          <Switch checked={value} onChange={switchChange} />
+          <Switch checked={value === "true" ? true : false} onChange={switchChange} />
         </SwitchArea>
       </Container>
     )
