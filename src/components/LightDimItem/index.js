@@ -86,7 +86,7 @@ export default connect({
           <FaCircleO onClick={e => onOffClick(e,0)} />
         </BottomIcon>
         <BottomSliderArea>
-          <LightSlider value={parseInt(value)} onChange={sliderChange} />
+          <LightSlider value={parseInt(value,10)} onChange={sliderChange} />
         </BottomSliderArea>
         <BottomIcon>
           <FaCircle onClick={e => onOffClick(e,100)} />
