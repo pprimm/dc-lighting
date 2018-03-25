@@ -13,7 +13,7 @@ export default Module(({ controller }) => {
 
     },
     signals: {
-      appMounted: sequences.initialize
+      appMounted: sequences.initialize,
     },
     modules: {
       dev,
@@ -22,6 +22,7 @@ export default Module(({ controller }) => {
         mqttOptions: {keepAlive: 1},
         deviceMqttRoot: 'dev',
         deviceList: ['dev01','dev02','dev03','dev04','dev05'],
+        viewRoot: 'view',
       }),
     },
     providers: {

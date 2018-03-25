@@ -6,6 +6,7 @@ const filterDimValue = value => value < 0 ? 0 : (value > 100 ? 100 : value)
 function MQTTProvider(options = {}) {
   let cachedClient = null
   let mqttDeviceSignal = null
+  let mqttViewSignal = null
 
   const getClient = () => {
     if (cachedClient) {
@@ -19,6 +20,7 @@ function MQTTProvider(options = {}) {
       cachedClient.publish('presence',"MQTT React App Client is here!!!")
       // can subscribe to topics now
       cachedClient.subscribe('get/dev/#')
+      cachedClient.subscribe('get/view/#')
     })
 
     cachedClient.on('close', function (err) {
@@ -38,19 +40,23 @@ function MQTTProvider(options = {}) {
       //console.log(`mqtt message received: ${topic} = ${message}`)
       const topicItems = topic.split('/')
       if (topicItems[0] === "get") {
+        const stateItems = topicItems.slice(2)
+        const statePath = stateItems.join(".")
         switch (topicItems[1]) {
           case "dev":
-            const stateItems = topicItems.slice(2)
-            const statePath = stateItems.join(".")
-            //console.log(`${statePath} = ${message}`)
             if (mqttDeviceSignal) {
+              //console.log(`${statePath} = ${message}`)
               mqttDeviceSignal({path: statePath, value: Number.parseInt(message,10)})
             }
             break;
           case "view":
+            //console.log(statePath)
+            if (mqttViewSignal) {
+              mqttViewSignal({path: statePath, value: message.toString()})
+            }
             break;
           default:
-            break;
+            break
         }
       }
     })
@@ -59,7 +65,8 @@ function MQTTProvider(options = {}) {
 
   return Provider({
     initialize(options) {
-      mqttDeviceSignal = options.mqttSignal;
+      mqttDeviceSignal = options.mqttDevSignal
+      mqttViewSignal = options.mqttViewSignal
     },
     connect() {
       getClient()

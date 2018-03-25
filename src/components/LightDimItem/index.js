@@ -59,7 +59,6 @@ const LightSlider = props =>
       marginLeft: '-0.5em',
       marginTop: '-0.5em'
     }}
-    onBeforeChange={props.onChange}
     onChange={props.onChange}
     {...props}
   />

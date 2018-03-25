@@ -4,8 +4,13 @@ import MQTTProvider from './MQTTProvider'
 
 function providerInitialize(context) {
   context.mqtt.announce("I'm here!!!")
+  const mqttSetDeviceState = context.controller.getSignal('mqtt.mqttSetDeviceState')
+  //console.log(mqttSetDeviceState)
+  const mqttSetViewState = context.controller.getSignal('mqtt.mqttSetViewState')
+  //console.log(mqttSetViewState)
   context.mqtt.initialize({
-    mqttSignal: context.controller.getSignal('mqtt.mqttSetDeviceState')
+    mqttDevSignal: mqttSetDeviceState,
+    mqttViewSignal: mqttSetViewState
   })
   context.mqtt.connect()
 }
@@ -18,8 +23,16 @@ function mqttToDeviceState({props,state}) {
   state.set(`dev.${props.path}`, props.value)
 }
 
-const mqttSetDeviceState = sequence('Set state from MQTT', [
+const mqttSetDeviceState = sequence('Set dev state from MQTT', [
   mqttToDeviceState
+])
+
+function mqttToViewState({props,state}) {
+  state.set(`view.${props.path}`, JSON.parse(props.value))
+}
+
+const mqttSetViewState = sequence('Set view state from MQTT', [
+  mqttToViewState
 ])
 
 export default options => {
@@ -41,7 +54,8 @@ export default options => {
       },
       signals: {
         mqttInit: initialize,
-        mqttSetDeviceState: mqttSetDeviceState
+        mqttSetDeviceState: mqttSetDeviceState,
+        mqttSetViewState: mqttSetViewState,
       }, 
       providers: {
         [name]: MQTTProvider(options),

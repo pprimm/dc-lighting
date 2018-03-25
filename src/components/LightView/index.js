@@ -1,0 +1,53 @@
+import React from 'react'
+import List from '../List'
+import ListHeader from '../ListHeader'
+//import LightSceneItem from '../LightSceneItem'
+//import LightDimItem from '../LightDimItem'
+//import LightSwitchItem from '../LightSwitchItem'
+import Divider from '../Divider'
+import {connect} from '@cerebral/react'
+import {state} from 'cerebral/tags'
+
+const components = {
+  LightDimItem: require('../LightDimItem').default,
+  LightSceneItem: require('../LightSceneItem').default,
+  LightSwitchItem: require('../LightSwitchItem').default,
+}
+
+export default connect({
+  scenes: state`view.lights.scenes`,
+  devices: state`view.lights.devices`
+},
+  function LightView({scenes, devices}) {
+    const LightSceneItem = components['LightSceneItem']
+    return (
+      <List>
+        <ListHeader>Scenes</ListHeader>
+        {
+          scenes ?
+            scenes.map(item => (
+              <div key={item.name}>
+                <LightSceneItem  label={item.name} devID={item.devID} />
+                <Divider />
+              </div>
+            )) :
+            null
+        }
+        <ListHeader>Devices</ListHeader>
+        {
+          devices ?
+            devices.map(item => {
+              const Device = components[item.compType]
+              return (
+                <div key={item.devID}>
+                  <Device  label={item.name} devID={item.devID} />
+                  <Divider />
+                </div>
+              )
+            }) :
+            null
+        }
+      </List>
+    )
+  }
+)
