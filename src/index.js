@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './components/App'
+import registerServiceWorker from './registerServiceWorker'
 import { ThemeProvider } from 'styled-components'
 import { Container } from '@cerebral/react'
 import controller from './controller'
@@ -13,7 +13,8 @@ const theme = {
   lightText: '#ecf0f1',
   listLightBG: '#2c3e50',
   lightOnDark: '#f39c12',
-  lightOnLight: '#f1c40f'
+  lightOnLight: '#f1c40f',
+  testColor: '#e74c3c'
 }
 
 ReactDOM.render(
@@ -21,5 +22,5 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </Container>, document.getElementById('root'));
-registerServiceWorker();
+  </Container>, document.getElementById('root'))
+registerServiceWorker()

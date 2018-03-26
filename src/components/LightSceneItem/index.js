@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { withTheme} from 'styled-components'
 import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o'
 import FaCheck from 'react-icons/lib/fa/check'
 import {connect} from '@cerebral/react'
@@ -12,8 +12,8 @@ const Container = styled.div`
 `
 
 const IconArea = styled.div`
-  color: ${props => props.active ?
-    props.theme.lightOnLight :
+  color: ${props => props.selectedColor ?
+    props.selectedColor :
     props.theme.lightText};
   min-width: 2em;
   margin: auto 0.2em;
@@ -26,18 +26,18 @@ const LabelArea = styled.div`
   flex: 1 0;
 `
 
-export default connect({
+export default withTheme(connect({
   scene: state`dev.${props`devID`}.scene`,
   selectScene: signal`dev.selectScene`
 },
-  function LightSceneItem ({ label, devID, scene, selectScene}) {
+  function LightSceneItem ({ label, devID, scene, selectScene, theme }) {
     const active = scene === label
     const onClick = () => {
       selectScene({id: devID, newScene: label})
     }
     return (
       <Container onClick={ onClick } >
-        <IconArea active={active}>
+        <IconArea active={active} selectedColor={theme.testColor} >
           <FaLightbulbO size={'1.2em'} />
         </IconArea>
         <LabelArea>{label}</LabelArea>
@@ -47,4 +47,4 @@ export default connect({
       </Container>
     )
   }
-)
+))

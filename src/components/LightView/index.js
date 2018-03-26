@@ -28,7 +28,6 @@ export default connect({
             scenes.map(item => (
               <div key={item.name}>
                 <LightSceneItem  label={item.name} devID={item.devID} />
-                <Divider />
               </div>
             )) :
             null
@@ -40,7 +39,7 @@ export default connect({
               const Device = components[item.compType]
               return (
                 <div key={item.devID}>
-                  <Device  label={item.name} devID={item.devID} />
+                  <Device label={item.name} devID={item.devID} />
                   <Divider />
                 </div>
               )

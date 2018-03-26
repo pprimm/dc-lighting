@@ -16,16 +16,16 @@ export default Controller(app, {
         scene: "Off"
       },
       dev02: {
-        level: 0
+        level: "0"
       },
       dev03: {
-        level: 0
+        level: "0"
       },
       dev04: {
-        switch: false
+        switch: "false"
       },
       dev05: {
-        switch: false
+        switch: "false"
       }
     }
   }
