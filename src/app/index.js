@@ -19,7 +19,12 @@ export default Module(({ controller }) => {
       dev,
       mqtt: MQTTModule({
         mqttUrl: 'ws://10.10.101.29:8083/mqtt',
-        mqttOptions: {keepAlive: 1},
+        mqttOptions: {
+          username: 'webClient',
+          password: 'public',
+          keepAlive: 10,
+          queueQoSZero: false,
+        },
         deviceMqttRoot: 'dev',
         deviceList: ['dev01','dev02','dev03','dev04','dev05'],
         viewRoot: 'view',

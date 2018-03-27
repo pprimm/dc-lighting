@@ -13,7 +13,7 @@ function MQTTProvider(options = {}) {
       return cachedClient;
     }
     cachedClient = mqtt.connect(options.mqttUrl,options.mqttOptions)
-    console.log(`mqtt.connect(${options.mqttUrl},${options.mqttOptions})`)
+    console.log(`mqtt.connect(${options.mqttUrl},${JSON.stringify(options.mqttOptions,null,2)})`)
 
     cachedClient.on('connect', function (err) {
       console.info('MQTT: Connected')
