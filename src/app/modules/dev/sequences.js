@@ -19,15 +19,8 @@ function selectSceneAction({props,mqtt}) {
   mqtt.updateScene(props.id,props.newScene)
 }
 
-/*export const changeDimLevel = sequence('Change Dim Level', [
-  debounce(50), {
-    continue: [dimChangeState, dimUpdateMqtt],
-    discard: [dimChangeState]
-  }
-])*/
-
 export const changeDimLevel = sequence('Change Dim Level', [
-  debounce(30), {
+  debounce(50), {
     continue: [dimUpdateMqtt],
     discard: [dimChangeState]
   }
