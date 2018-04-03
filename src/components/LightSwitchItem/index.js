@@ -23,23 +23,25 @@ const SwitchArea = styled.div`
   text-align: center;
 `
 
+const LightSwitchItem = ({ label, devID, value, selectSwitch}) => {
+  const switchChange = (newValue) => {
+    selectSwitch({id: devID, newValue: newValue})
+  }
+  return (
+    <Container>
+      <LabelArea>
+        {label}
+      </LabelArea>
+      <SwitchArea>
+        <Switch checked={value === "true" ? true : false} onChange={switchChange} />
+      </SwitchArea>
+    </Container>
+  )
+}
+
 export default connect({
   value: state`dev.${props`devID`}.switch`,
   selectSwitch: signal`dev.selectSwitch`
 },
-  function LightSwitchItem ({ label, devID, value, selectSwitch}) {
-    const switchChange = (newValue) => {
-      selectSwitch({id: devID, newValue: newValue})
-    }
-    return (
-      <Container>
-        <LabelArea>
-          {label}
-        </LabelArea>
-        <SwitchArea>
-          <Switch checked={value === "true" ? true : false} onChange={switchChange} />
-        </SwitchArea>
-      </Container>
-    )
-  }
+  LightSwitchItem
 )

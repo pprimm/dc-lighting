@@ -26,25 +26,27 @@ const LabelArea = styled.div`
   flex: 1 0;
 `
 
+const LightSceneItem = ({ label, devID, scene, selectScene, theme }) => {
+  const active = scene === label
+  const onClick = () => {
+    selectScene({id: devID, newScene: label})
+  }
+  return (
+    <Container onClick={ onClick } >
+      <IconArea active={active} selectedColor={theme.testColor} >
+        <FaLightbulbO size={'1.2em'} />
+      </IconArea>
+      <LabelArea>{label}</LabelArea>
+      <IconArea active={active}>
+        { active && <FaCheck size={'1.2em'} />}
+      </IconArea>
+    </Container>
+  )
+}
+
 export default withTheme(connect({
   scene: state`dev.${props`devID`}.scene`,
   selectScene: signal`dev.selectScene`
-},
-  function LightSceneItem ({ label, devID, scene, selectScene, theme }) {
-    const active = scene === label
-    const onClick = () => {
-      selectScene({id: devID, newScene: label})
-    }
-    return (
-      <Container onClick={ onClick } >
-        <IconArea active={active} selectedColor={theme.testColor} >
-          <FaLightbulbO size={'1.2em'} />
-        </IconArea>
-        <LabelArea>{label}</LabelArea>
-        <IconArea active={active}>
-          { active && <FaCheck size={'1.2em'} />}
-        </IconArea>
-      </Container>
-    )
-  }
+}, 
+  LightSceneItem
 ))

@@ -63,20 +63,16 @@ const LightSlider = props =>
     {...props}
   />
 
-export default connect({
-  value: state`dev.${props`devID`}.level`,
-  dragDimControl: signal`dev.selectDimControl`
-},
-  function LightDimItem ({ label, devID, value, dragDimControl}) {
-    const onOffClick = (e, newValue) => {
-      e.preventDefault()
-      dragDimControl({id: devID, newValue: newValue})
-    }
-    const sliderChange = (newValue) => {
-      dragDimControl({id: devID, newValue: newValue})
-    }
-    return (
-      <Container>
+const LightDimItem = ({ label, devID, value, dragDimControl}) => {
+  const onOffClick = (e, newValue) => {
+    e.preventDefault()
+    dragDimControl({id: devID, newValue: newValue})
+  }
+  const sliderChange = (newValue) => {
+    dragDimControl({id: devID, newValue: newValue})
+  }
+  return (
+    <Container>
       <TopArea>
         <TopLabel>{label}</TopLabel>
         <TopValue>{value}%</TopValue>
@@ -93,5 +89,12 @@ export default connect({
         </BottomIcon>
       </BottomArea>
     </Container>
-  )}
+  )
+}
+
+export default connect({
+  value: state`dev.${props`devID`}.level`,
+  dragDimControl: signal`dev.selectDimControl`
+}, 
+  LightDimItem
 )
