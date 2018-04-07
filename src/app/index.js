@@ -3,6 +3,7 @@ import { Module } from 'cerebral'
 import dev from './modules/dev'
 import MQTTModule from './modules/mqtt'
 import * as sequences from './sequences'
+import credentials from './credentials'
 
 export default Module(({ controller }) => {
   controller.on('initialized', () => {
@@ -18,10 +19,10 @@ export default Module(({ controller }) => {
     modules: {
       dev,
       mqtt: MQTTModule({
-        mqttUrl: 'wss://m11.cloudmqtt.com:30876',
+        mqttUrl: credentials.mqttUrl,
         mqttOptions: {
-          username: 'TestUser',
-          password: 'hn_nIjPg3ffQ',
+          username: credentials.mqttUsername,
+          password: credentials.mqttPassword,
           keepAlive: 10,
           queueQoSZero: false,
         },
