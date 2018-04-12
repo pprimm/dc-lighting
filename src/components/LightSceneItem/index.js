@@ -4,27 +4,9 @@ import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o'
 import FaCheck from 'react-icons/lib/fa/check'
 import {connect} from '@cerebral/react'
 import {state, props, signal} from 'cerebral/tags'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 2.5em;
-`
-
-const IconArea = styled.div`
-  color: ${props => props.selectedColor ?
-    props.selectedColor :
-    props.theme.lightText};
-  min-width: 2em;
-  margin: auto 0.2em;
-  text-align: center;
-`
-
-const LabelArea = styled.div`
-  color: ${props => props.theme.lightText};
-  margin: auto;
-  flex: 1 0;
-`
+import Container from './Container'
+import IconArea from './IconArea'
+import LabelArea from './LabelArea'
 
 const LightSceneItem = ({ label, devID, scene, selectScene, theme }) => {
   const active = scene === label
