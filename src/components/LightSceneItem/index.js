@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { withTheme} from 'styled-components'
+import { withTheme} from 'styled-components'
 import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o'
 import FaCheck from 'react-icons/lib/fa/check'
 import {connect} from '@cerebral/react'
@@ -8,7 +8,7 @@ import Container from './Container'
 import IconArea from './IconArea'
 import LabelArea from './LabelArea'
 
-const LightSceneItem = ({ label, devID, scene, selectScene, theme }) => {
+export const LightSceneItem = withTheme(({ label, devID, scene, selectScene, theme }) => {
   const active = scene === label
   const onClick = () => {
     selectScene({id: devID, newScene: label})
@@ -24,11 +24,11 @@ const LightSceneItem = ({ label, devID, scene, selectScene, theme }) => {
       </IconArea>
     </Container>
   )
-}
+})
 
-export default withTheme(connect({
+export default connect({
   scene: state`dev.${props`devID`}.scene`,
   selectScene: signal`dev.selectScene`
 }, 
   LightSceneItem
-))
+)
