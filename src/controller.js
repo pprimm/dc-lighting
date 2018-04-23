@@ -16,15 +16,24 @@ export default Controller(app, {
         scene: "Off"
       },
       dev02: {
-        level: "0"
+        level: "0",
+        muteMqtt: false
       },
       dev03: {
-        level: "0"
+        level: "0",
+        muteMqtt: false
       },
       dev04: {
         switch: "false"
       },
       dev05: {
+        switch: "false"
+      },
+      dev06: {
+        level: "0",
+        muteMqtt: false
+      },
+      dev07: {
         switch: "false"
       }
     }

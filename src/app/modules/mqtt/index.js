@@ -1,5 +1,6 @@
 import { Module } from 'cerebral'
 import { sequence } from 'cerebral'
+import { when, debounce } from 'cerebral/operators'
 import MQTTProvider from './MQTTProvider'
 
 function providerInitialize(context) {
@@ -19,12 +20,24 @@ const initialize = sequence('Initialize for MQTT Module', [
   providerInitialize
 ])
 
+function mqttToDeviceEval({props,state}) {
+  const [device, property] = props.path.split('.')
+  props.mute = (property === "level" && state.get(`dev.${device}.muteMqtt`))
+}
+
 function mqttToDeviceState({props,state}) {
-  state.set(`dev.${props.path}`, props.value)
+  if (!props.mute) {
+    state.set(`dev.${props.path}`, props.value)
+  }
 }
 
 const mqttSetDeviceState = sequence('Set dev state from MQTT', [
-  mqttToDeviceState
+  mqttToDeviceEval,
+  debounce(500),
+  {
+    continue: [mqttToDeviceState],
+    discard: []
+  }
 ])
 
 function mqttToViewState({props,state}) {

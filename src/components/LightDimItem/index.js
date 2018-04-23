@@ -60,16 +60,24 @@ const LightSlider = props =>
       marginTop: '-0.5em'
     }}
     onChange={props.onChange}
+    onBeforeChange={props.onBeforeChange}
+    onAfterChange={props.onAfterChange}
     {...props}
   />
 
-const LightDimItem = ({ label, devID, value, dragDimControl}) => {
+const LightDimItem = ({ label, devID, value, drag, startDrag, endDrag }) => {
   const onOffClick = (e, newValue) => {
     e.preventDefault()
-    dragDimControl({id: devID, newValue: newValue})
+    drag({id: devID, newValue: newValue})
   }
   const sliderChange = (newValue) => {
-    dragDimControl({id: devID, newValue: newValue})
+    drag({id: devID, newValue: newValue})
+  }
+  const sliderBeforeChange = (newValue) => {
+    startDrag({id: devID, newValue: newValue})
+  }
+  const sliderAfterChange = (newValue) => {
+    endDrag({id: devID, newValue: newValue})
   }
   return (
     <Container>
@@ -82,7 +90,12 @@ const LightDimItem = ({ label, devID, value, dragDimControl}) => {
           <FaCircleO onClick={e => onOffClick(e,0)} />
         </BottomIcon>
         <BottomSliderArea>
-          <LightSlider value={parseInt(value,10)} onChange={sliderChange} />
+          <LightSlider
+            value={parseInt(value,10)}
+            onChange={sliderChange}
+            onBeforeChange={sliderBeforeChange}
+            onAfterChange={sliderAfterChange}
+          />
         </BottomSliderArea>
         <BottomIcon>
           <FaCircle onClick={e => onOffClick(e,100)} />
@@ -94,7 +107,9 @@ const LightDimItem = ({ label, devID, value, dragDimControl}) => {
 
 export default connect({
   value: state`dev.${props`devID`}.level`,
-  dragDimControl: signal`dev.selectDimControl`
+  drag: signal`dev.dragDimControl`,
+  startDrag: signal`dev.dragStartDimControl`,
+  endDrag: signal`dev.dragEndDimControl`
 }, 
   LightDimItem
 )

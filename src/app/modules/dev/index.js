@@ -6,7 +6,9 @@ export default Module({
   state: {
   },
   signals: {
-    selectDimControl: sequences.changeDimLevel,
+    dragDimControl: sequences.changeDimLevel,
+    dragStartDimControl: sequences.startDimDrag,
+    dragEndDimControl: sequences.endDimDrag,
     selectSwitch: sequences.changeSwitch,
     selectScene: sequences.selectScene,
   }
