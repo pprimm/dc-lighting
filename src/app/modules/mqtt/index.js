@@ -33,11 +33,7 @@ function mqttToDeviceState({props,state}) {
 
 const mqttSetDeviceState = sequence('Set dev state from MQTT', [
   mqttToDeviceEval,
-  debounce(500),
-  {
-    continue: [mqttToDeviceState],
-    discard: []
-  }
+  mqttToDeviceState
 ])
 
 function mqttToViewState({props,state}) {
