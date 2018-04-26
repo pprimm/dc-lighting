@@ -38,12 +38,16 @@ const LightView = ({scenes, devices}) => {
         devices ?
           devices.map(item => {
             const Device = components[item.compType]
-            return (
-              <div key={item.devID}>
-                <Device label={item.name} devID={item.devID} />
-                <Divider />
-              </div>
-            )
+            return Device ?
+              (
+                <div key={item.devID}>
+                  <Device label={item.name} devID={item.devID} />
+                  <Divider />
+                </div>
+              ) :
+              (
+               <div style={{minHeight: '2em', background: 'red'}}>NO COMPONENT DEF</div>
+              )
           }) :
           null
       }

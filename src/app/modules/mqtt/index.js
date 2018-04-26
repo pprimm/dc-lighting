@@ -46,7 +46,7 @@ const mqttSetViewState = sequence('Set view state from MQTT', [
 
 export default options => {
   return Module(({ name, controller }) => {
-    console.log(`Module ${name} factory called with options: ${JSON.stringify(options)}`)
+    //console.log(`Module ${name} factory called with options: ${JSON.stringify(options)}`)
 
     controller.once('initialized:model', () => {
       console.log(`initialized:model called in module ${name}`)
