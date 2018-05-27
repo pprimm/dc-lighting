@@ -1,31 +1,13 @@
 import { sequence } from 'cerebral'
 import { debounce } from 'cerebral/operators'
-
-function dimChangeState({props,state}) {
-  state.set(`dev.${props.id}.level`, props.newValue)
-}
-
-function dimDragStart({props,state}) {
-  state.set(`dev.${props.id}.muteMqtt`, true)
-}
-
-function dimDragEnd({props,state}) {
-  state.set(`dev.${props.id}.muteMqtt`, false)
-}
-
-function dimUpdateMqtt({props,mqtt}) {
-  mqtt.updateDimLevel(props.id,props.newValue)
-}
-
-function switchChangeAction({props,mqtt}) {
-  //state.set(`dev.${props.id}.switch`, props.newValue)
-  mqtt.updateSwitch(props.id,props.newValue)
-}
-
-function selectSceneAction({props,mqtt}) {
-  //state.set(`dev.${props.id}.scene`, props.newScene)
-  mqtt.updateScene(props.id,props.newScene)
-}
+import {
+  dimChangeState,
+  dimDragStart,
+  dimDragEnd,
+  dimUpdateMqtt,
+  switchChangeAction,
+  selectSceneAction
+} from './actions'
 
 export const startDimDrag = sequence('Start Dim Drag', [
   dimDragStart,
@@ -39,7 +21,7 @@ export const endDimDrag = sequence('End Dim Drag', [
 
 //* changeDimLevel direct to mqtt
 export const changeDimLevel = sequence('Change Dim Level Drag', [
-  debounce(25),
+  debounce(15),
   {
     continue: [dimChangeState, dimUpdateMqtt],
     discard: [dimChangeState]

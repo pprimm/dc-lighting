@@ -1,48 +1,6 @@
 import { Module } from 'cerebral'
-import { sequence } from 'cerebral'
-import { when, debounce } from 'cerebral/operators'
 import MQTTProvider from './MQTTProvider'
-
-function providerInitialize(context) {
-  context.mqtt.announce("I'm here!!!")
-  const mqttSetDeviceState = context.controller.getSignal('mqtt.mqttSetDeviceState')
-  //console.log(mqttSetDeviceState)
-  const mqttSetViewState = context.controller.getSignal('mqtt.mqttSetViewState')
-  //console.log(mqttSetViewState)
-  context.mqtt.initialize({
-    mqttDevSignal: mqttSetDeviceState,
-    mqttViewSignal: mqttSetViewState
-  })
-  context.mqtt.connect()
-}
-
-const initialize = sequence('Initialize for MQTT Module', [
-  providerInitialize
-])
-
-function mqttToDeviceEval({props,state}) {
-  const [device, property] = props.path.split('.')
-  props.mute = (property === "level" && state.get(`dev.${device}.muteMqtt`))
-}
-
-function mqttToDeviceState({props,state}) {
-  if (!props.mute) {
-    state.set(`dev.${props.path}`, props.value)
-  }
-}
-
-const mqttSetDeviceState = sequence('Set dev state from MQTT', [
-  mqttToDeviceEval,
-  mqttToDeviceState
-])
-
-function mqttToViewState({props,state}) {
-  state.set(`view.${props.path}`, JSON.parse(props.value))
-}
-
-const mqttSetViewState = sequence('Set view state from MQTT', [
-  mqttToViewState
-])
+import * as sequences from './sequences'
 
 export default options => {
   return Module(({ name, controller }) => {
@@ -62,9 +20,9 @@ export default options => {
         connected: false
       },
       signals: {
-        mqttInit: initialize,
-        mqttSetDeviceState: mqttSetDeviceState,
-        mqttSetViewState: mqttSetViewState,
+        mqttInit: sequences.initialize,
+        mqttSetDeviceState: sequences.mqttSetDeviceState,
+        mqttSetViewState: sequences.mqttSetViewState,
       }, 
       providers: {
         [name]: MQTTProvider(options),

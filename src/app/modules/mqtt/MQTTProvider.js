@@ -19,8 +19,17 @@ function MQTTProvider(options = {}) {
       console.info('MQTT: Connected')
       cachedClient.publish('presence',"MQTT React App Client is here!!!")
       // can subscribe to topics now
-      cachedClient.subscribe('get/dev/#')
-      cachedClient.subscribe('get/view/#')
+      const subscriptions = [
+        'get/view/#',
+        'get/dev/dev01/#',
+        'get/dev/dev02/#',
+        'get/dev/dev03/#',
+        'get/dev/dev04/#',
+        'get/dev/dev05/#',
+        'get/dev/dev06/#',
+        'get/dev/dev07/#',
+      ]
+      cachedClient.subscribe(subscriptions)
     })
 
     cachedClient.on('close', function (err) {
